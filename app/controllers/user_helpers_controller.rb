@@ -1,0 +1,2 @@
+class UserHelpersController < ApplicationController
+end
