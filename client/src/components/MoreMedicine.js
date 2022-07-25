@@ -13,7 +13,7 @@ function MoreMedicine(){
         setMoreMedicine(true)
     }
     function handlePush(){
-        navigate("/home")
+        navigate("/addhelper")
     }
     
     return(

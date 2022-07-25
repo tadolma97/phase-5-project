@@ -1,7 +1,13 @@
-function Home(){
+
+function Home({user}){
+    // console.log(user)
     return(
-        <div></div>
+        <>
+        <div>Hello, {user.first_name}</div>
+        </>
     )
 }
+
+// <div>Hello, {user.first_name}</div>
 
 export default Home

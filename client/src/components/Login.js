@@ -1,6 +1,7 @@
 import React, { useState } from "react"; 
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function Login({setUser}) {
+   let navigate = useNavigate();
    const [first_name, setFirst_Name] = useState("");
    const [last_name, setLast_Name] = useState("");
    const [email, setEmail] = useState("");
@@ -10,10 +11,6 @@ function Login({setUser}) {
    let [authMode, setAuthMode] = useState("signin")
 
    console.log(first_name, last_name, email, password)
-//    const history=useHistory();
-
-//    function handleClick(){
-//       history.push("/")}
 
    const changeAuthMode = () => {
      setAuthMode(authMode === "signin" ? "signup" : "signin")
@@ -33,9 +30,9 @@ function Login({setUser}) {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((user) => {
-            // setUser(user);
+            setUser(user);
             console.log(user);
-            // handleClick();
+            navigate("/home")
           });
         } else {
           r.json().then((err) => setErrors(err.errors));
@@ -57,8 +54,8 @@ function Login({setUser}) {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((user) => {
-            console.log(user);
-            // handleClick();
+            setUser(user);
+            navigate("/newhome")
           });
         } else {
           r.json().then((err) => setErrors(err.errors));
