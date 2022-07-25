@@ -9,7 +9,7 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.string :recurrence_pattern
       t.integer :user_id
       t.integer :helper_id
-      t.time :time 
+      t.time :time
 
       t.timestamps
     end

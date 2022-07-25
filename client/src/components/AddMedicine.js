@@ -38,16 +38,12 @@ function AddMedicine(){
         </Form.Group>
         <Form.Group controlId="recurrenePattern">
         <DropdownButton
-      alignRight
-      title="Dropdown right"
-      id="dropdown-menu-align-right"
-      onSelect={(e)=>setRecurrencePattern(e)}
+            title="Dropdown right"
+            id="dropdown-menu-align-right"
+            onSelect={(e)=>setRecurrencePattern(e)}
         >
               <Dropdown.Item eventKey="Daily">Daily</Dropdown.Item>
               <Dropdown.Item eventKey="option-2">x</Dropdown.Item>
-              <Dropdown.Item eventKey="option-3">x</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item eventKey="some link">some link</Dropdown.Item>
       </DropdownButton>
         </Form.Group>
         <Form.Group controlId="time">
