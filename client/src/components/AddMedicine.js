@@ -4,9 +4,11 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import TimePicker from 'react-bootstrap-time-picker';
 import { useState} from "react"
+import {useNavigate} from "react-router-dom"
 
 
 function AddMedicine(){
+    let navigate = useNavigate();
     const [name, setName]=useState("")
     const [image, setImage] = useState("")
     const [startDate, setStartDate] = useState(new Date())
@@ -16,10 +18,14 @@ function AddMedicine(){
 
     console.log(name, image, startDate, endDate, recurrenePattern, time)
     
+    function handleSubmit(e){
+      console.log(name, image, startDate, endDate)
+      navigate('/moremedicine')
+    }
 
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Medicine Name</Form.Label>
           <Form.Control type="text" placeholder="Enter name of medicine" onChange={(e)=>setName(e.target.value)}/>
