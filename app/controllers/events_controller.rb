@@ -17,6 +17,12 @@ class EventsController < ApplicationController
         head :no_content
     end
 
+    def update 
+        event=Event.find(params[:id])
+        event.update!(event_params)
+        render json: event
+    end
+
     def reminder_update
         event=Event.find(params[:id])
         reminder=event.reminders.find_by(date: Time.zone.today)

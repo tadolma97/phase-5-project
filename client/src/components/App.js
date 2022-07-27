@@ -12,7 +12,6 @@ import { Route, Routes } from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState(null)
-  const [events, setEvents]=useState([])
   
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -28,11 +27,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login setUser={setUser}/>}/>
         {/* <Route path="/form" element={<AddMedicine user={user} />}/> */}
-        <Route path="/" element={<Home user={user} events={events} setEvents={setEvents}/>}/>
+        <Route path="/" element={<Home user={user}/>}/>
         <Route path="/newhome" element={<NewHome user={user}/>}/>
         <Route path="/addhelper" element={<AddHelper user={user}/>}/>
         <Route path="/moremedicine" element={<MoreMedicine user={user}/>}/>
-        <Route path="/userprofile" element={<UserProfile user={user} events={events}/>}/>
+        <Route path="/userprofile" element={<UserProfile user={user}/>}/>
       </Routes>
     </div>
   );

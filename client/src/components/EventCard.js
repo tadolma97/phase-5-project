@@ -1,8 +1,7 @@
 function EventCard({event}){
     console.log(event)
     function handleChange(){
-        // fetch(`/completed/`+event.id, {
-            fetch(`/completed`, {
+        fetch(`/completed`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'

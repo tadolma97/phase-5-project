@@ -3,8 +3,9 @@ import EventCard from "./EventCard";
 import Button from "react-bootstrap/esm/Button";
 import { useNavigate } from "react-router-dom";
 
-function Home({user, events, setEvents}){
+function Home({user}){
     let navigate = useNavigate();
+    const [events, setEvents]=useState([])
 
 
     useEffect(() => {

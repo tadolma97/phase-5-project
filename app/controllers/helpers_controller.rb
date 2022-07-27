@@ -7,7 +7,12 @@ class HelpersController < ApplicationController
         helper=Helper.create!(helper_params)
         user_helper=UserHelper.create!(helper_id: helper.id, user_id: params[:user_id])
         render json: helper
+    end
 
+    def update 
+        helper=Helper.find(params[:id])
+        helper.update!(helper_params)
+        render json: helpers
     end
 
     private

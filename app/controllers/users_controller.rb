@@ -36,6 +36,14 @@ class UsersController < ApplicationController
       render json: eventValid
     end
 
+    def helpers
+      user=User.find(params[:id])
+      helpers=user.helpers
+      render json: helpers
+    end
+
+
+
 
     private
     def user_params
