@@ -32,7 +32,7 @@ function Login({setUser}) {
           r.json().then((user) => {
             setUser(user);
             console.log(user);
-            navigate("/home")
+            navigate("/")
           });
         } else {
           r.json().then((err) => setErrors(err.errors));

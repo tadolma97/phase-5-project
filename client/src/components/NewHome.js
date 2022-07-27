@@ -1,9 +1,9 @@
 import AddMedicine from "./AddMedicine"
-function NewHome(){
+function NewHome({user}){
     return (
         <div>
             <h1> Let's get started by adding your Medicine!</h1>
-            <AddMedicine></AddMedicine>
+            <AddMedicine user={user} ></AddMedicine>
 
         </div>
     )

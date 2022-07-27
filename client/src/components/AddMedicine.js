@@ -2,24 +2,39 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import TimePicker from 'react-bootstrap-time-picker';
 import { useState} from "react"
 import {useNavigate} from "react-router-dom"
 
 
-function AddMedicine(){
+function AddMedicine({user}){
     let navigate = useNavigate();
     const [name, setName]=useState("")
     const [image, setImage] = useState("")
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
-    const [recurrenePattern, setRecurrencePattern] = useState("")
+    const [recurrencePattern, setRecurrencePattern] = useState("Pick a Schedule")
     const [time, setTime]=useState()
 
-    console.log(name, image, startDate, endDate, recurrenePattern, time)
+    console.log(time)
     
     function handleSubmit(e){
-      console.log(name, image, startDate, endDate)
+      e.preventDefault()
+      fetch("/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+        name: name, 
+        image: image, 
+        start_date: startDate, 
+        end_date: endDate, 
+        is_recurring: true, 
+        recurrence_pattern: recurrencePattern, 
+        user_id: user.id, 
+        time: time 
+      })
+      })
       navigate('/moremedicine')
     }
 
@@ -44,16 +59,19 @@ function AddMedicine(){
         </Form.Group>
         <Form.Group controlId="recurrenePattern">
         <DropdownButton
-            title="Dropdown right"
+            title={recurrencePattern}
             id="dropdown-menu-align-right"
             onSelect={(e)=>setRecurrencePattern(e)}
-        >
+        >     
               <Dropdown.Item eventKey="Daily">Daily</Dropdown.Item>
               <Dropdown.Item eventKey="option-2">x</Dropdown.Item>
       </DropdownButton>
         </Form.Group>
+        {/* <Form.Group controlId="time" value={time}>
+            <TimePicker start="5:00" end="21:00" step={60} onChange={(e)=>setTime(e)} value={time} />
+        </Form.Group> */}
         <Form.Group controlId="time">
-            <TimePicker start="10:00" end="21:00" step={30} onChange={(e)=>setTime(e)} />
+            <Form.Control type="time"  onChange={(e)=>setTime(e.target.value)} value={time} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Submit

@@ -23,8 +23,7 @@ function AddHelper({user}){
           user_id: user.id
         })
         })
-        navigate('/home')
-        
+        navigate('/')
     }
 
     return(

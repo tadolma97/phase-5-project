@@ -23,6 +23,19 @@ class UsersController < ApplicationController
     def show
         render json: @current_user
     end
+    
+    def events
+      user= User.find(params[:id])
+      events=user.events
+      eventValid=[]
+      events.each do |event|
+        if Time.zone.today.between?(event.start_date, event.end_date)
+          eventValid.push(event)
+        end
+      end
+      render json: eventValid
+    end
+
 
     private
     def user_params
