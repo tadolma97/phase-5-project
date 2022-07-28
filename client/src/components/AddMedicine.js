@@ -14,8 +14,6 @@ function AddMedicine({user}){
     const [endDate, setEndDate] = useState(new Date())
     const [recurrencePattern, setRecurrencePattern] = useState("Pick a Schedule")
     const [time, setTime]=useState()
-
-    console.log(time)
     
     function handleSubmit(e){
       e.preventDefault()
@@ -67,9 +65,6 @@ function AddMedicine({user}){
               <Dropdown.Item eventKey="option-2">x</Dropdown.Item>
       </DropdownButton>
         </Form.Group>
-        {/* <Form.Group controlId="time" value={time}>
-            <TimePicker start="5:00" end="21:00" step={60} onChange={(e)=>setTime(e)} value={time} />
-        </Form.Group> */}
         <Form.Group controlId="time">
             <Form.Control type="time"  onChange={(e)=>setTime(e.target.value)} value={time} />
         </Form.Group>

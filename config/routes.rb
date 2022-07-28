@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   get "/user/:id/events", to: "users#events"
   patch '/completed', to: "events#reminder_update"
+  get '/event/:id/reminder', to: "events#reminder"
   get "/user/:id/helpers", to: "users#helpers"
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

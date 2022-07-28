@@ -1,5 +1,5 @@
-function EventCard({event}){
-    console.log(event)
+
+function EventCard({event, change, setChange}){
     function handleChange(){
         fetch(`/completed`, {
             method: 'PATCH',
@@ -7,21 +7,22 @@ function EventCard({event}){
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                is_completed: true,
+                is_completed: !event.show_today_reminder.is_completed,
                 id: event.id
             }),
           })
             .then(resp => resp.json())
             .then(data => console.log(data))
+            setChange(!change)
     }
-    console.log(event.time)
+
 
     return(
         <li className="card">
             <h3>{event.name}</h3>
             <img src={event.image} alt={"Medicine Image"} />
             <p>Take medicine at: {event.time} </p>
-            <div>  Complete <input onClick={handleChange} type="checkbox" /> </div> 
+            <button onClick={handleChange}>{event.show_today_reminder.is_completed ?  `Completed at ${event.show_today_reminder.updated_at}`:"Complete" }</button>
 
         
         </li>

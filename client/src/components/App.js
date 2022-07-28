@@ -8,6 +8,7 @@ import MoreMedicine from './MoreMedicine';
 import UserProfile from './UserProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom'
+import AddMedicine from './AddMedicine';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         {/* <Route path="/form" element={<AddMedicine user={user} />}/> */}
         <Route path="/" element={<Home user={user}/>}/>
         <Route path="/newhome" element={<NewHome user={user}/>}/>
+        <Route path="/addmedicine" element={<AddMedicine  user={user}/>}/>
         <Route path="/addhelper" element={<AddHelper user={user}/>}/>
         <Route path="/moremedicine" element={<MoreMedicine user={user}/>}/>
         <Route path="/userprofile" element={<UserProfile user={user}/>}/>
