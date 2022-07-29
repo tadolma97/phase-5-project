@@ -20,11 +20,9 @@ function EventCard({event, change, setChange}){
     return(
         <li className="card">
             <h3>{event.name}</h3>
-            <img src={event.image} alt={"Medicine Image"} />
+            <img src={event.image} alt={"Medicine"} />
             <p>Take medicine at: {event.time} </p>
             <button onClick={handleChange}>{event.show_today_reminder.is_completed ?  `Completed at ${event.show_today_reminder.updated_at}`:"Complete" }</button>
-
-        
         </li>
     )
 }
