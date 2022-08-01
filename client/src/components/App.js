@@ -9,6 +9,7 @@ import UserProfile from './UserProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom'
 import AddMedicine from './AddMedicine';
+import MainPage from './MainPage';
 
 
 function App() {
@@ -22,18 +23,19 @@ function App() {
     });
   }, []);
   console.log(user)
-  if (!user) return <div></div>
+  if (!user) return <MainPage></MainPage>
   return (
     <div className="App">
       <Routes>
         <Route path="/login" element={<Login setUser={setUser}/>}/>
         {/* <Route path="/form" element={<AddMedicine user={user} />}/> */}
-        <Route path="/" element={<Home user={user}/>}/>
+        <Route path="/home" element={<Home user={user}/>}/>
         <Route path="/newhome" element={<NewHome user={user}/>}/>
         <Route path="/addmedicine" element={<AddMedicine  user={user}/>}/>
         <Route path="/addhelper" element={<AddHelper user={user}/>}/>
         <Route path="/moremedicine" element={<MoreMedicine user={user}/>}/>
         <Route path="/userprofile" element={<UserProfile user={user}/>}/>
+        <Route path="/" element={<MainPage setUser={setUser}/>}/>
       </Routes>
     </div>
   );

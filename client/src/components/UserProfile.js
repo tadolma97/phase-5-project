@@ -101,7 +101,7 @@ function UserProfile({user}){
         </div>
         <h2>Your Health Partner</h2>
         {partners.map((partner) =><HealthPartner partner={partner} key={partner.id} change={change} setChange={setChange}></HealthPartner>)}
-        <Button onClick={() => navigate('/')}>Done</Button>
+        <Button onClick={() => navigate('/home')}>Done</Button>
         </div>
     )
 }
