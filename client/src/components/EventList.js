@@ -1,8 +1,9 @@
 import Button from "react-bootstrap/esm/Button"
 import { useState } from "react"; 
 import Form from 'react-bootstrap/Form';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Modal from 'react-bootstrap/Modal';
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
+
 
 function EventList({event, change, setChange}){
     const [edit, setEdit]= useState(true)
@@ -20,6 +21,29 @@ function EventList({event, change, setChange}){
     function handleCancel(){
         setEdit(!edit)
     }
+
+    function handleTime2(time){
+        time = time.split(":");
+    
+        let hours = Number(time[0]);
+        let minutes = Number(time[1]);
+    
+        let timeValue;
+    
+        if (hours > 0 && hours <= 12) {
+          timeValue = "" + hours;
+        } else if (hours > 12) {
+          timeValue = "" + (hours - 12);
+        } else if (hours === 0) {
+          timeValue = "12";
+        }
+    
+        timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
+        timeValue += hours >= 12 ? " P.M." : " A.M.";
+    
+        return timeValue
+      };
+
 
     function handleSubmit(){
         fetch(`/events/` + event.id, {
@@ -48,14 +72,44 @@ function EventList({event, change, setChange}){
     }
     return (
         <>
-        {edit ? <li>{event.name}<Button onClick={handleClick}>Edit</Button><Button onClick={handleDelete}>Delete</Button> </li>:
+        {edit ? 
+                    <tbody>
+                        <tr>
+                        <td>{event.name}</td>
+                        <td >                                            
+                            <div class="event-img">
+                                <img src={event.image} alt="" />
+                            </div>
+                        </td>
+                        <td>{event.start_date}</td>
+                        <td>{event.end_date}</td>
+                        <td>{handleTime2(event.time)}</td>
+                        <button className='invisible-button' onClick={handleClick}> <Player hover loop
+                    src="https://assets2.lottiefiles.com/packages/lf20_hezrxjwp.json"
+                    style={{ height: '50px', width: '50px' }}
+                    
+                  >
+                  <Controls  visible={false} buttons={['play', 'hover', 'frame', 'debug']} />
+                  </Player> </button>
+
+                  <button className='invisible-button' onClick={()=>handleDelete()}> <Player hover loop
+                    src="https://assets9.lottiefiles.com/packages/lf20_zqyfjktd.json"
+                    style={{ height: '50px', width: '50px' }}
+                    
+                  >
+                  <Controls  visible={false} buttons={['play', 'hover', 'frame', 'debug']} />
+                  </Player> </button>
+                        </tr>
+                    </tbody>:
+                <Modal show         backdrop="static">
+                    <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Medicine Name</Form.Label>
                 <Form.Control type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Add Image</Form.Label>
+                <Form.Label>Image</Form.Label>
                 <Form.Control type="text" value={image} onChange={(e)=>setImage(e.target.value)}/>
                 </Form.Group>
                 <Form.Group controlId="startdate">
@@ -82,13 +136,16 @@ function EventList({event, change, setChange}){
                 <Form.Group controlId="time">
                     <Form.Control type="time" value={time} onChange={(e)=>setTime(e.target.value)} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <div className="d-flex justify-content-center"><Button variant="primary" type="submit">
                 Submit
                 </Button>
                 <Button onClick={handleCancel}>
                     Cancel
                 </Button>
+                </div>
             </Form>
+            </Modal.Body>
+            </Modal>
       }
         </>
     )

@@ -1,5 +1,8 @@
 import React, { useState } from "react"; 
 import { useNavigate } from "react-router-dom";
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import Row from "react-bootstrap/esm/Row"
+import Col from "react-bootstrap/esm/Col"
 
 function Login({setUser}) {
    let navigate = useNavigate();
@@ -10,6 +13,7 @@ function Login({setUser}) {
    const [errors, setErrors] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
    let [authMode, setAuthMode] = useState("signin")
+   
 
    console.log(first_name, last_name, email, password)
 
@@ -69,7 +73,16 @@ function Login({setUser}) {
       <div class="container-fluid">
           <div class="row no-gutter">
              
-              <div class="col-md-6 d-none d-md-flex bg-image"></div>
+              <div class="col-md-6 d-md-flex bg-image">
+              <Player autoplay loop
+                                src="https://assets7.lottiefiles.com/packages/lf20_mfwsp8vy.json"
+                                style={{ height: "100%", width: '100%' }}
+                    
+                        >
+                          <Controls  visible={false} buttons={['play', 'hover', 'frame', 'debug']} />
+                          </Player> 
+
+              </div>
               
               <div class="col-md-6 bg-light">
                   <div class="login d-flex align-items-center py-5">

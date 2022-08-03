@@ -1,4 +1,7 @@
-
+import Card from "react-bootstrap/esm/Card";
+import Container from "react-bootstrap/esm/Container";
+import CardImg from "react-bootstrap/esm/CardImg";
+import Button from "react-bootstrap/esm/Button";
 function EventCard({event, change, setChange}){
     function handleChange(){
         fetch(`/completed`, {
@@ -12,18 +15,51 @@ function EventCard({event, change, setChange}){
             }),
           })
             .then(resp => resp.json())
-            .then(data => console.log(data))
-            setChange(!change)
+            .then(data => {console.log(data)
+                setChange(!data.is_completed)})
+            
     }
+    function handleTime(time){
+        const newTime=new Date(time)
+        const def = newTime.toLocaleTimeString('default', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+        return def
+    }
+
+    function handleTime2(time){
+        time = time.split(":");
+    
+        let hours = Number(time[0]);
+        let minutes = Number(time[1]);
+    
+        let timeValue;
+    
+        if (hours > 0 && hours <= 12) {
+          timeValue = "" + hours;
+        } else if (hours > 12) {
+          timeValue = "" + (hours - 12);
+        } else if (hours === 0) {
+          timeValue = "12";
+        }
+    
+        timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
+        timeValue += hours >= 12 ? " P.M." : " A.M.";
+    
+        return timeValue
+      };
 
 
     return(
-        <li className="card">
-            <h3>{event.name}</h3>
-            <img src={event.image} alt={"Medicine"} />
-            <p>Take medicine at: {event.time} </p>
-            <button onClick={handleChange}>{event.show_today_reminder.is_completed ?  `Completed at ${event.show_today_reminder.updated_at}`:"Complete" }</button>
-        </li>
+        <Card style={{borderRadius:30}} >
+            <Card.Body>
+            <img  className="card-img" src={event.image} alt={"Medicine"} />
+            <Card.Title style={{fontSize: 30}}>{event.name}</Card.Title>
+            <Card.Text>Take medicine at: {handleTime2(event.time)} </Card.Text>
+            <Button className='complete-button' style={{borderRadius:50, border: 0, backgroundColor: 'rgb(0,193,162)', fontSize: 20}} onClick={handleChange}>{event.show_today_reminder.is_completed ?  `Completed at ${handleTime(event.show_today_reminder.updated_at)}`:"Complete" }</Button>
+            </Card.Body>
+        </Card>
     )
 }
 

@@ -5,11 +5,12 @@ import AddHelper from './AddHelper';
 import Login from './Login';
 import Home from './Home';
 import MoreMedicine from './MoreMedicine';
-import UserProfile from './UserProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom'
 import AddMedicine from './AddMedicine';
 import MainPage from './MainPage';
+import 'react-pro-sidebar/dist/css/styles.css';
+import Page from './Page';
 
 
 function App() {
@@ -34,8 +35,8 @@ function App() {
         <Route path="/addmedicine" element={<AddMedicine  user={user}/>}/>
         <Route path="/addhelper" element={<AddHelper user={user}/>}/>
         <Route path="/moremedicine" element={<MoreMedicine user={user}/>}/>
-        <Route path="/userprofile" element={<UserProfile user={user}/>}/>
         <Route path="/" element={<MainPage setUser={setUser}/>}/>
+        <Route path="/page" element={<Page user={user}/>}/>
       </Routes>
     </div>
   );

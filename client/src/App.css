@@ -60,18 +60,39 @@
   min-height: 100vh;
 }
 .bg-image {
-  background-image: url("./loginImage.jpg");
-  background-size: cover;
-  background-position: center center;
+  justify-content: center;
 }
 
-@media (min-width: 768px) {
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
+#header {
+  position: absolute;
+  width: 220px;
+  }
+  #header .pro-sidebar-header{
+    padding: 10px;
+    font-size: 1.8rem;
+    color: rgb(255, 255, 255);
+  }
+#header .pro-sidebar-inner {
+  background-color:  rgb(64, 109, 92);
+  box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
+  }
+  #header .pro-sidebar-inner .pro-sidebar-layout {
+  overflow-y: hidden;
+  height: 100vh;
+  }
+ 
+  #header .pro-sidebar-inner .pro-sidebar-layout ul {
+  padding: 0 5px;
+  }
+  #header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  margin: 10px 0px;
+  font-weight: bold;
   }
 
-  .card {
-    width: calc(33% - 2rem);
-  }
+.pro-sidebar-footer .pro-item-content{
+  font-size: 1.8rem;
+  text-align: center;
+  letter-spacing: 10px;
 }
