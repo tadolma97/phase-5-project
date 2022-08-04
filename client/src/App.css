@@ -92,7 +92,11 @@
   }
 
 .pro-sidebar-footer .pro-item-content{
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   text-align: center;
-  letter-spacing: 10px;
+  letter-spacing: 2px;
+}
+
+#home.col{
+  margin-right: 100px !important;
 }

@@ -22,5 +22,27 @@ namespace :send_reminder_email do
       end
     end
 
+    task notify: :environment do
+      User.all.each do |user|
+        medicines=[]
+        events=user.events
+        events.each do |event|
+          event.reminders.each do |reminder|
+            if reminder.date==Time.zone.today && reminder.is_completed!=true
+              medicines << reminder.event
+            end
+          end 
+        end
+        puts "Start"
+        
+        medicines.each do |medicine|
+          puts user.first_name
+          helper=user.helpers.first
+          UserMailer.with(user: user,helper: helper, medicine: medicine.name).alert_email.deliver
+        end
+        puts "End"
+      end 
+    end
+
   end
   

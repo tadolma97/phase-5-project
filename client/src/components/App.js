@@ -14,7 +14,7 @@ import Page from './Page';
 
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState()
   
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -23,20 +23,19 @@ function App() {
       }
     });
   }, []);
-  console.log(user)
+
   if (!user) return <MainPage></MainPage>
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<Login setUser={setUser}/>}/>
         {/* <Route path="/form" element={<AddMedicine user={user} />}/> */}
-        <Route path="/home" element={<Home user={user}/>}/>
+        <Route path="/home" element={<Home user={user} setUser={setUser}/>}/>
         <Route path="/newhome" element={<NewHome user={user}/>}/>
         <Route path="/addmedicine" element={<AddMedicine  user={user}/>}/>
         <Route path="/addhelper" element={<AddHelper user={user}/>}/>
         <Route path="/moremedicine" element={<MoreMedicine user={user}/>}/>
         <Route path="/" element={<MainPage setUser={setUser}/>}/>
-        <Route path="/page" element={<Page user={user}/>}/>
+        <Route path="/page" element={<Page user={user} setUser={setUser}/>}/>
       </Routes>
     </div>
   );

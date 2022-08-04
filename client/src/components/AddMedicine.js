@@ -68,7 +68,7 @@ function AddMedicine({user}){
         <Form.Group controlId="time">
             <Form.Control type="time"  onChange={(e)=>setTime(e.target.value)} value={time} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" style={{borderRadius:50, border: 0, backgroundColor: 'rgb(0,193,162)', fontSize: 20}} type="submit">
           Submit
         </Button>
       </Form>

@@ -2,7 +2,9 @@ import Card from "react-bootstrap/esm/Card";
 import Container from "react-bootstrap/esm/Container";
 import CardImg from "react-bootstrap/esm/CardImg";
 import Button from "react-bootstrap/esm/Button";
+import React, { useState, useEffect } from "react"; 
 function EventCard({event, change, setChange}){
+  const [completed, setCompleted]=useState(event.show_today_reminder.is_completed)
     function handleChange(){
         fetch(`/completed`, {
             method: 'PATCH',
@@ -16,7 +18,7 @@ function EventCard({event, change, setChange}){
           })
             .then(resp => resp.json())
             .then(data => {console.log(data)
-                setChange(!data.is_completed)})
+                setCompleted(!completed)})
             
     }
     function handleTime(time){
@@ -57,7 +59,7 @@ function EventCard({event, change, setChange}){
             <img  className="card-img" src={event.image} alt={"Medicine"} />
             <Card.Title style={{fontSize: 30}}>{event.name}</Card.Title>
             <Card.Text>Take medicine at: {handleTime2(event.time)} </Card.Text>
-            <Button className='complete-button' style={{borderRadius:50, border: 0, backgroundColor: 'rgb(0,193,162)', fontSize: 20}} onClick={handleChange}>{event.show_today_reminder.is_completed ?  `Completed at ${handleTime(event.show_today_reminder.updated_at)}`:"Complete" }</Button>
+            <Button className='complete-button' style={{borderRadius:50, border: 0, backgroundColor: 'rgb(0,193,162)', fontSize: 20}} onClick={handleChange}>{completed ?  `Completed at ${handleTime(event.show_today_reminder.updated_at)}`:"Complete" }</Button>
             </Card.Body>
         </Card>
     )

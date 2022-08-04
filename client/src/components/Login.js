@@ -21,6 +21,10 @@ function Login({setUser}) {
      setAuthMode(authMode === "signin" ? "signup" : "signin")
    }
 
+   function handleClick(){
+    navigate("/home")
+   }
+
    function handleSubmit(e) {
       e.preventDefault();
       console.log(e);
@@ -36,8 +40,7 @@ function Login({setUser}) {
         if (r.ok) {
           r.json().then((user) => {
             setUser(user);
-            console.log(user);
-            navigate("/home")
+            handleClick();
           });
         } else {
           r.json().then((err) => setErrors(err.errors));
@@ -60,6 +63,7 @@ function Login({setUser}) {
         if (r.ok) {
           r.json().then((user) => {
             setUser(user);
+            console.log(user);
             navigate("/newhome")
           });
         } else {
@@ -91,7 +95,7 @@ function Login({setUser}) {
                           <div class="row">
                           <div className="Auth-form-container">
                             {authMode === "signin"?
-                            <form className="Auth-form" onSubmit={handleSubmit}>
+                            <form className="Auth-form" onSubmit={(e)=>handleSubmit(e)}>
                               <div className="Auth-form-content">
                                 <h3 className="Auth-form-title" align='center'>Sign In</h3>
                                 <div className="text-center">

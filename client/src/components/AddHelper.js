@@ -23,7 +23,7 @@ function AddHelper({user}){
           user_id: user.id
         })
         })
-        navigate('/')
+        navigate('/home')
     }
 
     return(
@@ -43,7 +43,7 @@ function AddHelper({user}){
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" placeholder="Enter your health partner's email" onChange={(e)=>setEmail(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" style={{borderRadius:50, border: 0, backgroundColor: 'rgb(0,193,162)', fontSize: 20}} type="submit">
           Submit
         </Button>
         </Form>

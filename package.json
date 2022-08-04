@@ -9,5 +9,9 @@
     "clean": "rm -rf public",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+  },
+  "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.4.7",
+    "bootstrap-icons": "^1.9.1"
   }
 }

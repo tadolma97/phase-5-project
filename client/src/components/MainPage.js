@@ -1,6 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
 import Login from './Login';
-import {useState, useEffect } from "react"; 
+import {useState} from "react"; 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/esm/Button';
@@ -19,9 +19,9 @@ function MainPage({setUser}){
           <Navbar bg="light" variant="light" className="nav-bar" fixed="top" style={{marginBottom: 0, paddingTop: 0, paddingBottom: 0, boxShadow: "2px 2px 1px rgba(46, 46, 46, 0.62)", height: 50}}>
             <Container>
             <Navbar.Brand >HEALTH PARTNER</Navbar.Brand>
-            <Nav.Link href="#home">About</Nav.Link>
+
             <Nav className=" navbar-collapse justify-content-end">
-                <Button variant="outline-primary" style={{color:"#fa8b9a", margin: "5%", boxShadow: "2px 2px 1px rgba(46, 46, 46, 0.5)"}} onClick={()=>setShowLogin(false)} className="ml-auto p-2">Login</Button>
+                <Button style={{borderRadius:50, border: 0, backgroundColor: 'rgb(0,193,162)', fontSize: 20}} onClick={()=>setShowLogin(false)} className="ml-auto p-2">Login</Button>
             </Nav>
             </Container>
         </Navbar>

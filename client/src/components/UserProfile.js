@@ -20,21 +20,21 @@ function UserProfile({user, select}){
     const [endDate, setEndDate] = useState(new Date())
     const [recurrencePattern, setRecurrencePattern] = useState("Pick a Schedule")
     const [time, setTime]=useState()
-
+    console.log(user)
     useEffect(() => {
         fetch(`/user/${user.id}/events`)
           .then(response=> response.json())
           .then(data=> {setEvents(data)})
-        }, [change])
+        }, [user])
 
     useEffect(() => {
         fetch(`/user/${user.id}/helpers`)
             .then(response=> response.json())
             .then(data=> {setPartners(data)})
-        }, [change])
+        }, [user])
 
         function handleSubmit(e){
-            e.preventDefault()
+          e.preventDefault()
             fetch("/events", {
               method: "POST",
               headers: {
@@ -51,6 +51,8 @@ function UserProfile({user, select}){
               time: time 
             })
             })
+            .then(response=> response.json())
+            .then(data=> setEvents([...events, data]))
             setEdit(true)
           }
 
@@ -103,7 +105,7 @@ function UserProfile({user, select}){
                   </Player> </button>: 
                   <Modal show         backdrop="static">
                   <Modal.Body>
-                                    <Form onSubmit={handleSubmit}>
+                                    <Form onSubmit={(e)=>handleSubmit(e)}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                       <Form.Label>Medicine Name</Form.Label>
                                       <Form.Control type="text" placeholder="Enter name of medicine" onChange={(e)=>setName(e.target.value)}/>
@@ -157,7 +159,7 @@ function UserProfile({user, select}){
                                   <th scope="col">Time</th>
                                   </tr>
                               </thead>
-                  {events.map((event) =><EventList event={event} key={event.id} change={change} setChange={setChange}></EventList>)}
+                  {events.length>0?events.map((event) =><EventList event={event} key={event.id} events={events} setEvents={setEvents}></EventList>):"You have no medicine added"}
                   </Table>
         </div>
         </div>
@@ -225,7 +227,7 @@ function UserProfile({user, select}){
                         <th scope="col">Email</th>
                         </tr>
                     </thead>
-        {partners.map((partner) =><HealthPartner partner={partner} partners={partners} key={partner.id} change={change} setChange={setChange}></HealthPartner>)}
+        {partners.length>0?partners.map((partner) =><HealthPartner partner={partner} partners={partners} key={partner.id} change={change} setChange={setChange}></HealthPartner>):"You have no Health Partners added"}
         </Table>
         </div>
         </div>:null}

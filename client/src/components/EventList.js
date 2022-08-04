@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 
 
-function EventList({event, change, setChange}){
+function EventList({event, events, setEvents}){
     const [edit, setEdit]= useState(true)
     const [name, setName]=useState(event.name)
     const [image, setImage] = useState(event.image)
@@ -13,6 +13,7 @@ function EventList({event, change, setChange}){
     const [endDate, setEndDate] = useState(event.end_date)
     const [recurrencePattern, setRecurrencePattern] = useState(event.recurrence_pattern)
     const [time, setTime]=useState(event.time)
+
 
     function handleClick(){
         setEdit(!edit)
@@ -61,14 +62,17 @@ function EventList({event, change, setChange}){
             }),
           })
             .then(resp => resp.json())
-            .then(data => console.log(data))
+            .then(data => setEvents(data))
     }
 
     function handleDelete(){
         fetch('/events/' + event.id, {
         method: 'DELETE',
         })
-        setChange(!change)
+        // .then(console.log(events.filter((item)=>item.id!==event.id)))
+        .then(()=>setEvents(events.filter((item)=>item.id!==event.id)))
+        // .then(response => response.json())
+
     }
     return (
         <>
@@ -92,7 +96,7 @@ function EventList({event, change, setChange}){
                   <Controls  visible={false} buttons={['play', 'hover', 'frame', 'debug']} />
                   </Player> </button>
 
-                  <button className='invisible-button' onClick={()=>handleDelete()}> <Player hover loop
+                  <button className='invisible-button' onClick={()=>handleDelete(event)}> <Player hover loop
                     src="https://assets9.lottiefiles.com/packages/lf20_zqyfjktd.json"
                     style={{ height: '50px', width: '50px' }}
                     
